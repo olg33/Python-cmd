@@ -1,0 +1,430 @@
+#!/usr/local/bin/python3.5  -----> Shebang Tells the system which interpreter to use to execute the file
+
+# Look Inside a module:
+import module
+dir(module)
+
+# Set a path
+import sys
+sys.path.append('/usr/etc/etc')
+
+#!/usr/bin/env python3
+print('Hello')
+
+
+-----------------------
+
+chmod +x hello.py
+
+Execute:
+ ./hello.py
+ python3 hello.py
+
+OR
+
+chmod 777 hello.py
+
+------------------------------
+ Upgrading Python 3 from source	
+
+https://www.python.org/downloads/source/
+
+Then download and untar the tarball; for example for
+
+https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tgz
+
+The process for untarring the tgz file is:
+
+tar -xvzf /path/to/yourfile.tgz
+
+Once you are in the file path the file was unzipped to, run:
+
+./configure
+make
+make install
+
+----------------------------------------
+Installing a package
+
+download Tar file
+Uncompress
+look for setup.py file
+
+setup.py is a python file, which usually tells you that the module/package you are about to install have been packaged and distributed with Distutils, which is the standard for distributing Python Modules.
+
+This allows you to easily install Python packages, often it's enough to write:
+
+python setup.py install
+
+and the module will install itself.
+
+------------------------------------------
+If we use the raw_input function in Python 2.x or the input function in Python 3, the result is
+always a string
+
+x = int(raw_input("Input an integer: "))
+y = float(raw_input("Input a float: "))
+print x, y
+--------------------------------------------
+
+pip3 install ipcalc
+
+>>> import ipcalc
+>>> for x in ipcalc.Network('172.16.42.0/30'):
+...     print str(x)
+...
+172.16.42.1
+172.16.42.2
+>>> subnet = ipcalc.Network('2001:beef:babe::/48')
+>>> print str(subnet.network())
+2001:beef:babe:0000:0000:0000:0000:0000
+>>> print str(subnet.netmask())
+ffff:ffff:ffff:0000:0000:0000:0000:0000
+>>> '192.168.42.23' in Network('192.168.42.0/24')
+True
+>>> long(IP('fe80::213:ceff:fee8:c937'))
+338288524927261089654168587652869703991L
+
+ --------------------------------------------------------
+To Add a directory in Python path:
+
+>>> import sys
+>>> sys.path.append('/ufs/guido/lib/python')
+
+>>> import sys
+>>> sys.path
+['', '/usr/local/lib/python25.zip', '/usr/local/lib/python2.5', ... ]
+
+apt-get install python3-pip
+pip freeze ----> shows all the packages installed by pip
+
+------------------------------------------------------------------------
+  INSTALLING AND USING VIRTUAL ENVIRONMENTS (WRAPPER)
+
+Installing Virtualenv:
+
+ pip3 install virtualenv
+
+Installing virtualenv wrapper:
+  
+ pip3 install virtualenvwrapper
+
+Add to ~/.bashrc:
+
+  export WORKON_HOME=/home/oscar/Python/Projects/VirtEnvs
+  export PROJECT_HOME=/home/oscar/Python/Projects
+  source /home/oscar/.local/bin/virtualenvwrapper.sh 
+  export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+  $ which python3 ----> shows path
+----------------------------------------------------------------------
+
+mkvirtualenv <name> ---> creates VE (Wrapper)
+ls $WORKON_HOME ---> Shows VEs files
+workon <VE> ---> switches between VEs or starts a VE
+deactivate ---> exits VE 
+rmvirtualenv my_Project ---> Deletes VE virtualenvwrapper command
+
+-----------------------------------------------------------------------------------
+ 
+Installing Python packages from source
+
+Read README.tx or INSTALL.txt
+
+python3 setup.py build
+python3 setup.py install
+
+-------------------------------------------------------------------
+Retrieving Python Module path:
+
+import <module>
+import inspect
+inspect.getfile(<module>)
+
+-----------------------------------------------------------
+Adding a module to the Python default directory
+
+import sys
+sys.path
+sys.path.append('/path/to/the/module')
+look for :
+
+ /usr/lib/python3.6/site-packages
+
+Install files there
+
+--------------------------------------------------------------------
+ 
+Code Runner (Extension of Visual Studio Code 
+
+o run code:
+
+    use shortcut Ctrl+Alt+N
+    or press F1 and then select/type Run Code,
+    or right click the Text Editor and then click Run Code in editor context menu
+    or click Run Code button in editor title menu
+    or click Run Code button in context menu of file explorer
+
+To stop the running code:
+
+    use shortcut Ctrl+Alt+M
+    or press F1 and then select/type Stop Code Run
+    or right click the Output Channel and then click Stop Code Run in context menu
+
+To restart a program: ctrl/shift/F5
+
+------------------------------------------------------------------------------
+
+Installing & Running Anaconda
+
+Download file from web site
+
+$bash Anaconda3-2019.03-Linux-x86_64.sh
+
+if not done by the installer activate Anaconda:
+
+source ~/anaconda3/etc/profile.d/conda.sh
+
+anaconda-navigator
+
+or
+
+source home/oscar/anaconda3/bin/activate root
+anaconda-navigator
+
+Creating a new environment :
+$ conda create -n MyProject python=3
+
+Removing an environment :
+$conda remove --name MyProject --all
+
+Activation:
+conda activate MyProject (Linux, MacOS)
+
+Deactivation:
+conda deactivate (Linux, MacOS)
+deacticate (Windows) 
+
+Installing Packages:
+$ conda list -----> Shows current packages
+$ conda install <package> -----> Installs package in environment
+$ conda info --envs ------> Shows list of current encironments
+$ conda env list ---> Same
+
+-------------------------------------------------------------------------------
+
+git UN:olg32 / email: olg8510@gmail.com
+
+The following commands enable color highlighting for Git in the console:
+
+[jerry@CentOS project]$ git config --global color.ui true
+
+[jerry@CentOS project]$ git config --global color.status auto
+
+[jerry@CentOS project]$ git config --global color.branch auto
+
+
+setting default edittor:
+[jerry@CentOS project]$ git config --global core.editor nano
+pips
+
+---------------------------------------------------------------
+Windows Bash
+
+cd /mnt
+
+c  d
+
+cd c
+
+-------------------------------------------------------
+
+LAMBDA USE:
+
+ You can build a function in the normal way, using def, like this:
+
+def square_root(x): return math.sqrt(x)
+
+or you can use lambda:
+
+square_root = lambda x: math.sqrt(x)
+
+So, although we could code (say)
+
+def __init__(self, parent):
+    """Constructor"""
+    frame = tk.Frame(parent)
+    frame.pack()
+
+    btn22 = tk.Button(frame,
+        text="22", command=self.buttonCmd22)
+    btn22.pack(side=tk.LEFT)
+
+    btn44 = tk.Button(frame,
+        text="44", command=self.buttonCmd44)
+    btn44.pack(side=tk.LEFT)
+
+def buttonCmd22(self):
+    self.printNum(22)
+
+def buttonCmd44(self):
+    self.printNum(44)
+
+it is much easier (and clearer) to code
+
+def __init__(self, parent):
+    """Constructor"""version
+    frame = tk.Frame(parent)
+    frame.pack()
+
+    btn22 = tk.Button(frame,
+        text="22", command=lambda: self.printNum(22))
+    btn22.pack(side=tk.LEFT)
+
+    btn44 = tk.Button(frame,
+        text="44", command=lambda: self.printNum(44))
+    btn44.pack(side=tk.LEFT)
+--------------------------------------------------------------------------------
+
+(tutorial-env) $ pip search astronomy
+skyfield               - Elegant astronomy for Python
+gary                   - Galactic astronomy and gravitational dynamics.
+novas                  - The United States Naval Observatory NOVAS astronomy library
+astroobs               - Provides astronomy ephemeris to plan telescope observations
+PyAstronomy            - A collection of astronomy related tools for Python.
+
+---------------------------------------------------------------------------
+ANSIBLE COMMANDS
+
+$ sudo apt-add-repository --yes --update ppa:ansible/ansible
+$ sudo apt update
+$ sudo apt install ansible
+$ pip3 install ansible
+
+$ ansible --version | grep "python version"
+
+ADD Hosts in the /etc/ansible/hosts file
+
+[production]
+nap-01.vm
+
+[testing]
+nap-01.vm
+
+ESTABLISH SSH CONNECTIVITY
+
+From the admin server:
+# ssh-keygen -t rsa -b4096
+- To copy to the target server:
+#ssh-copy-id ubutest@139.162.35.39
+
+Basic Modules:
+- Ping:
+# ansible -i hosts all -m ping -u ubutest
+- list-hosts
+# ansible -i hosts production --list-hosts
+- setup
+# ansible -i hosts all -m setup -u ubutest
+- command
+# ansible -i hosts all -m command -a 'uptime' -u root
+# ansible -i /etc/ansible/hosts all -m command -a 'ifconfig' -u root
+# ansible -m 
+
+--------------------------------------------------------------------------------------------
+Selecting a python version among several
+
+- Install latest python:
+sudo add-apt-repository ppa:jonathonf/python-3.X
+sudo apt-get update
+sudo apt-get install python3.X
+
+- Set Priorities:
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2
+sudo update-alternatives --config python3 <---- (Enter 2 for Python 3.7)
+
+- Test: python3 -V
+
+--------------------------------------------------------------------------------------------
+
+ansible -i /etc/ansible/hosts testing -m command -a 'sudo sed -i '/MONITORING_Remote_Routes/a up route add -net 11.111.1.11 netmask 255.255.255.192 gw 10.110.1.65' /etc/network/interfaces' -u administrator
+
+
+
+network.yaml
+---
+- hosts: testing
+  tasks:
+    - name: Adds Static Routes
+      command:
+         script.sh
+
+ansible-playbook network.yml -i /etc/ansible/hosts
+
+add ssh keys 
+
+ ansible-playbook --ask-sudo-pass test.yml
+
+--------------------------------------------------
+
+---
+- name: "Add Static Routes"
+  hosts: testing
+  remote_user: administrator
+  become: true
+  tasks:
+     - name: Execute command
+       shell: sed -i '/MONITORING_Remote_Routes/a TEST ROUTE2' /etc/network/interfaces
+-------------------------------------------------------------------
+
+VirtualEnv Wrapper:
+
+Add to ~/.bashrc:
+
+export WORKON_HOME=/home/oscar/Python/Projects/
+export PROJECT_HOME=/home/oscar/Python/Projects/
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source /home/oscar/.local/bin/virtualenvwrapper.sh
+
+Commands:
+
+mkvirtualenv <name> -----> Creates VE
+lsvirtualenv -l
+workon <VE> ---> Lists virtual environments and switches to desired VE
+wipeenv ---> removes all the third party packages
+deactivate --> 
+rmvirtualenv -->
+
+----------------------------------------------------------------------------
+
+#!/usr/bin/env python3  ---> For virtenv
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
