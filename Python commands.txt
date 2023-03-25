@@ -44,6 +44,15 @@ make
 make install
 
 ----------------------------------------
+
+- Update pip3
+
+- sudo pip3 install --upgrade pip
+- sudo pip install --upgrade setuptools
+- /usr/bin/python3 -m pip install --upgrade pip
+
+--------------------------------------------------
+
 Installing a package
 
 download Tar file
@@ -68,9 +77,11 @@ print x, y
 --------------------------------------------
 
 pip3 install ipcalc
+pip3 install six
 
->>> import ipcalc
->>> for x in ipcalc.Network('172.16.42.0/30'):
+#!/usr/bin/env python3.8
+ import ipcalc
+   for x in ipcalc.Network('172.16.42.0/30'):
 ...     print str(x)
 ...
 172.16.42.1
@@ -99,32 +110,6 @@ apt-get install python3-pip
 pip freeze ----> shows all the packages installed by pip
 
 ------------------------------------------------------------------------
-  INSTALLING AND USING VIRTUAL ENVIRONMENTS (WRAPPER)
-
-Installing Virtualenv:
-
- pip3 install virtualenv
-
-Installing virtualenv wrapper:
-  
- pip3 install virtualenvwrapper
-
-Add to ~/.bashrc:
-
-  export WORKON_HOME=/home/oscar/Python/Projects/VirtEnvs
-  export PROJECT_HOME=/home/oscar/Python/Projects
-  source /home/oscar/.local/bin/virtualenvwrapper.sh 
-  export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-  $ which python3 ----> shows path
-----------------------------------------------------------------------
-
-mkvirtualenv <name> ---> creates VE (Wrapper)
-ls $WORKON_HOME ---> Shows VEs files
-workon <VE> ---> switches between VEs or starts a VE
-deactivate ---> exits VE 
-rmvirtualenv my_Project ---> Deletes VE virtualenvwrapper command
-
------------------------------------------------------------------------------------
  
 Installing Python packages from source
 
@@ -173,61 +158,7 @@ To stop the running code:
 To restart a program: ctrl/shift/F5
 
 ------------------------------------------------------------------------------
-
-Installing & Running Anaconda
-
-Download file from web site
-
-$bash Anaconda3-2019.03-Linux-x86_64.sh
-
-if not done by the installer activate Anaconda:
-
-source ~/anaconda3/etc/profile.d/conda.sh
-
-anaconda-navigator
-
-or
-
-source home/oscar/anaconda3/bin/activate root
-anaconda-navigator
-
-Creating a new environment :
-$ conda create -n MyProject python=3
-
-Removing an environment :
-$conda remove --name MyProject --all
-
-Activation:
-conda activate MyProject (Linux, MacOS)
-
-Deactivation:
-conda deactivate (Linux, MacOS)
-deacticate (Windows) 
-
-Installing Packages:
-$ conda list -----> Shows current packages
-$ conda install <package> -----> Installs package in environment
-$ conda info --envs ------> Shows list of current encironments
-$ conda env list ---> Same
-
--------------------------------------------------------------------------------
-
-git UN:olg32 / email: olg8510@gmail.com
-
-The following commands enable color highlighting for Git in the console:
-
-[jerry@CentOS project]$ git config --global color.ui true
-
-[jerry@CentOS project]$ git config --global color.status auto
-
-[jerry@CentOS project]$ git config --global color.branch auto
-
-
-setting default edittor:
-[jerry@CentOS project]$ git config --global core.editor nano
-pips
-
----------------------------------------------------------------
+ 
 Windows Bash
 
 cd /mnt
@@ -293,56 +224,8 @@ astroobs               - Provides astronomy ephemeris to plan telescope observat
 PyAstronomy            - A collection of astronomy related tools for Python.
 
 ---------------------------------------------------------------------------
-ANSIBLE COMMANDS
-
-$ sudo apt-add-repository --yes --update ppa:ansible/ansible
-$ sudo apt update
-$ sudo apt install ansible
-$ pip3 install ansible
-
-$ ansible --version | grep "python version"
-
-ADD Hosts in the /etc/ansible/hosts file
-
-[production]
-nap-01.vm
-
-[testing]
-nap-01.vm
-
-ESTABLISH SSH CONNECTIVITY
-
-From the admin server:
-# ssh-keygen -t rsa -b4096
-- To copy to the target server:
-#ssh-copy-id ubutest@139.162.35.39
-
-Basic Modules:
-- Ping:
-# ansible -i hosts all -m ping -u ubutest
-- list-hosts
-# ansible -i hosts production --list-hosts
-- setup
-# ansible -i hosts all -m setup -u ubutest
-- command
-# ansible -i hosts all -m command -a 'uptime' -u root
-# ansible -i /etc/ansible/hosts all -m command -a 'ifconfig' -u root
-# ansible -m 
-
---------------------------------------------------------------------------------------------
-Selecting a python version among several
-
-- Install latest python:
-sudo add-apt-repository ppa:jonathonf/python-3.X
-sudo apt-get update
-sudo apt-get install python3.X
-
-- Set Priorities:
-sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
-sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2
-sudo update-alternatives --config python3 <---- (Enter 2 for Python 3.7)
-
-- Test: python3 -V
+ 
+- Test: python3  -V
 
 --------------------------------------------------------------------------------------------
 
@@ -375,53 +258,252 @@ add ssh keys
      - name: Execute command
        shell: sed -i '/MONITORING_Remote_Routes/a TEST ROUTE2' /etc/network/interfaces
 -------------------------------------------------------------------
+ VIRTUAL ENVIRONMENTS
 
-VirtualEnv Wrapper:
+- Installing Venv
 
-Add to ~/.bashrc:
+apt install -y python3-venv
 
-export WORKON_HOME=/home/oscar/Python/Projects/
-export PROJECT_HOME=/home/oscar/Python/Projects/
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source /home/oscar/.local/bin/virtualenvwrapper.sh
+- Create Venv
+
+root@ubuntu:~# mkdir vir_env ----> Subdirectory with all VEs
+root@ubuntu:~# cd vir_env---------> mode to vir_env
+root@ubuntu:~/vir_env# sudo python3 -m venv Project 
+
+- Activate Venv
+
+$ source /home/oscar/Python/vir_env/test1/bin/activate
+
+
+
+- Deactivate:
+
+ (env)$deactivate
+
+- Install libraries
+
+- Create a venv with system packages
+
+Create the virtual environment without the --system-site-packages switch. 
+After the environment was created go to the folder the environment was created in. It should have a file pyvenv.cfg. Edit this file. It has (among other text) a line
+
+include-system-site-packages = false
+
+Change this line to:
+
+include-system-site-packages = true
+
+Activate the environment. Module installations will now go to the virtual environment and the system site packages are visible too.
+
+--------------------------------------------------------------------
+
+Defining shebang for Venv
+
+(Venv) $ which python3
+
+#!/home/oscar/Python/vir_env/test1/bin/python3
+
+------------------------------------------------------------------
+Make sure folder is owned by osccar:
+ 
+sudo chown -R oscar /path/to/working/directory
+
+-Delete a venv
+
+ rm -r venv/
+
+
+------------------------------------------------------------------
+Upgrading a package
+
+pip3 install colorama --upgrade
+
+---------------------------------------------------------------------
+
+Installing pyATS
+
+- create Venv
+- cd venv
+- sudo pip3 install --upgrade pip
+- sudo pip install --upgrade setuptools
+- sudo pip install pyats[full] ---------------------> better
+
+sudo pip3 install pyats[full] -t /home/devnet/Pyats/DevOps/acl_edit/lib/python3.10/site-packages/ ---> directly on Venv
+
+-t, --target <dir>          Install packages into <dir>. By default this will not replace existing files/folders in <dir>. Use --upgrade to replace existing packages in <dir> with new versions.
+
+
+pyats version check -->verify if pyats is running normally
+
+pyats version check --outdated ----> looks for packages thet need to be upgraded
+
+pyats version update ------> update current pyATS installation to another version
+
+If upgrade is needed:
+
+pip install pyats[library] --upgrade
+pip install pyats.contrib --upgrade
+
+    pip3 install --upgrade genie genie.libs.clean genie.libs.conf
+    pip3 install --upgrade genie.libs.filetransferutils genie.libs.health genie.libs.ops
+    pip3 install --upgrade genie.libs.parser genie.libs.sdk pyats
+    pip3 install --upgrade pyats.aereport pyats.aetest pyats.async
+    pip3 install --upgrade pyats.connections pyats.datastructures pyats.easypy
+    pip3 install --upgrade pyats.kleenex pyats.log pyats.reporter
+    pip3 install --upgrade pyats.results pyats.tcl pyats.topology
+    pip3 install --upgrade pyats.utils unicon unicon.plugins
+
+
+
+
+pyats validate testbed testbed.yaml
+
+pyats learn ospf interface --testbed-file tb.yaml --output today
+
+pyats diff today/ yesterday/
+
+------------------------------------------------------------------------------------
+
+administrator@DevNet-01:~/pyats/lab1$ pyats --help
+Usage:
+  pyats <command> [options]
 
 Commands:
+    clean               runs the provided clean file
+    create              create scripts and libraries from template
+    diff                Command to diff two snapshots saved to file or directory
+    dnac                Command to learn DNAC features and save to file (Prototype)
+    learn               Command to learn device features and save to file
+    logs                command enabling log archive viewing in local browser
+    parse               Command to parse show commands
+    run                 runs the provided script and output corresponding results.
+    secret              utilities for working with secret strings.
+    shell               enter Python shell, loading a pyATS testbed file and/or pickled data
+    validate            utlities that helps to validate input files
+    version             commands related to version display and manipulation
 
-mkvirtualenv <name> -----> Creates VE
-lsvirtualenv -l
-workon <VE> ---> Lists virtual environments and switches to desired VE
-wipeenv ---> removes all the third party packages
-deactivate --> 
-rmvirtualenv -->
+--------------------------------------------------------------------------------------------------
 
-----------------------------------------------------------------------------
+pyats parse "show mac address-table" --testbed-file uwaco_testbed.yml --output PRE 	Execute the "show MAC address-table" command on the device or devices in my testbed file and save the structured and unstructured output in a subdirectory alley PRE
+pyats parse "show mac address-table" --testbed-file uwaco_testbed.yml --output POST 	Same but save this output in a subdirectory called POST
+pyats diff PRE POST 	                                                                Compare and output the differences in standard Unix Diff format.
 
-#!/usr/bin/env python3  ---> For virtenv
+---------------------------------------------------------------------------------------------------
 
+pyats learn < Model> --testbed-file testbed1.yaml ----> See Genie models list https://pubhub.devnetcloud.com/media/genie-feature-browser/docs/#/models
 
+pyats learn platform --testbed-file testbed1.yaml --devices GE_HUB1_INT_HRT1.MIR ----> Sh ver
 
+pyats parse "show interfaces description" --testbed-file testbed1.yaml --devices CSR1k-MIR_01.rt --output CSR1K/POST
 
+pyats logs view /path/to/archive.zip
 
++=========================================================================================================================>
+| Commands for learning feature 'Platform'                                                                                >
++=========================================================================================================================>
+| - Parsed commands                                                                                                       >
+|------------------------------------------------------------------------------------------------------------------------->
+|   cmd: <class 'genie.libs.parser.iosxe.show_platform.ShowVersion'>                                                      >
+|   cmd: <class 'genie.libs.parser.iosxe.show_platform.Dir'>                                                              >
+|   cmd: <class 'genie.libs.parser.iosxe.show_platform.ShowRedundancy'>                                                   >
+|   cmd: <class 'genie.libs.parser.iosxe.show_platform.ShowInventory'>                                                    >
+|   cmd: <class 'genie.libs.parser.iosxe.show_issu.ShowIssuRollbackTimer'>                                                >
+|   cmd: <class 'genie.libs.parser.iosxe.show_platform.ShowPlatform'>                                                     >
+|   cmd: <class 'genie.libs.parser.iosxe.show_issu.ShowIssuStateDetail'>                                                  >
+|=========================================================================================================================>
 
+pyats.conf location: /home/administrator/.pyats/
+-----------------------------------------------------------------------------------------------------------------------
 
+Logging
 
+# Example
+# -------
+#
+#   attaching TaskLogHandler to root logger, enabling all log messages to be
+#   logged to a particular file, and then changing the file to log to
 
+import logging
+from pyats.log import TaskLogHandler
 
+# get the root logger
+logger = logging.getLogger(__name__)
 
+# create handler (with full path to log file)
+handler = TaskLogHandler('/path/to/my/TaskLog-A.log')
 
+# add handler to logger
+logger.addHandler(handler)
 
+# set logging level a bit lower to enable INFO
+logger.setLevel(logging.INFO)
 
+# now try logging
+logger.info('an info message')
 
+# get current log directory and file
+logdir = handler.logdir
+logfile = handler.logfile
 
+Logging Levels
 
+Python logging natively offers 5 logging levels:
 
+        critical
 
+        error
 
+        warning
 
+        info
 
+        debug
 
+At any time, logging level can be set using setLevel API:
 
+# Example
+# -------
+#
+#   setting logger level
+#
+#   available levels:
+#       logging.INFO
+#       logging.CRITICAL
+#       logging.ERROR
+#       logging.WARNING
+#       logging.DEBUG
 
+import logging
+
+logger = logging.getLogger(__name__)
+
+logger.setLevel(logging.INFO)
+
+--------------------------------------------------------------------
+Encoding pw on testbed fike
+
+Using the default YAML encoding key since no key was specified in configuration.
+
+THIS IS A SHARED KEY AND IS NOT SECURE, PLEASE RUN `pyats secret keygen` AND ADD TO YOUR pyats.conf FILE BEFORE ENCODING ANY VALUES.
+
+--------------------------------------------------------------------------------
+
+Debugging:
+
+session.sendline('sh ver | inc Version')
+
+i = 0
+    for element in version_output_lines:
+        print("\n Element %i = %s" % (i, version_output_lines[i]))
+        i+=1
+osc = input()
+
+ 
+----------------------------------------------------------------------------------
+
+Installing ipython3
+
+sudo apt-get install -y ipython3
 
 
 
